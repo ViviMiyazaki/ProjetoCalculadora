@@ -1,38 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css">
   <title>Calculadora</title>
 </head>
 <body>
   <div class="calculadora"> 
-    <div class="result">0</div>
+    <div class="result" >
+      <p class="display" id="display"></p>
+    </div>
     
-      <div class="teclas">
-        <button class="operator" data-action="">C</button>
-        <button class="operator" data-action="po">%</button>
-        <button class="operator" data-action="divide">÷</button>
-        <button class="operator" data-action="multiply">&times;</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button class="operator" data-action="subtract">-</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button class="operator" data-action="add">+</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>0</button>
-        <button data-action="decimal">.</button>
-        <button data-action="clear">Clear</button>
-        <button class="igual" data-action="calculate">=</button>
-      </div>
-    
+    <div class="teclas">
+      <button class="operator" id="clean" onclick="clean()">C</button>
+      <button class="operator" id="">%</button>
+      <button class="operator" id="divide" onclick="insert('/')">/</button>
+      <button class="operator" id="multiplication" onclick="insert('*')">*</button>
+      <button onclick="insert('7')" id="tecla7">7</button>
+      <button onclick="insert('8')" id="tecla8">8</button>
+      <button onclick="insert('9')" id="tecla9">9</button>
+      <button class="operator" id="subtraction" onclick="insert('-')">-</button>
+      <button onclick="insert('4')" id="tecla4">4</button>
+      <button onclick="insert('5')" id="tecla5">5</button>
+      <button onclick="insert('6')" id="tecla6">6</button>
+      <button class="operator" id="sum" onclick="insert('+')">+</button>
+      <button onclick="insert('1')" id="tecla1">1</button>
+      <button onclick="insert('2')" id="tecla2">2</button>
+      <button onclick="insert('3')" id="tecla3">3</button>
+      <button onclick="insert('0')" id="tecla0">0</button>
+      <button id="decimal" onclick="insert(',')">,</button>
+      <button id="backspace" onclick="back()"><img src="imagens/backspace.svg" alt=""></button>
+      <button id="equal" onclick="calculate()">=</button>
+    </div>
   </div>
+
+  <script src="./script.js"></script>
 </body>
 </html>
