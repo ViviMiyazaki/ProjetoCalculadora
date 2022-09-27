@@ -1,84 +1,55 @@
-// variáveis
-const display = document.getElementById('display')
-const numbers = document.querySelectorAll('[id*=tecla]')
-const operators = document.querySelectorAll('.operator')
+function insert(num)
+        {
+            var numero = document.getElementById('display').innerHTML;
+            document.getElementById('display').innerHTML = numero + num;
+        }
+        function clean()
+        {
+            document.getElementById('display').innerHTML = "";
+        }
+        function back()
+        {
+            var result = document.getElementById('display').innerHTML;
+            document.getElementById('display').innerHTML = result.substring(0, result.length -1);
+        }
+        function calculate()
+        {
+            var result = document.getElementById('display').innerHTML;
+            if(result)
+            {
+                document.getElementById('display').innerHTML = eval(result);
+            }
+            else
+            {
+                document.getElementById('display').innerHTML = "Nada..."
+            }
+        }
 
-let newNumber = true;
-let operator;
-let previousNumber;
-
-const pendingOperation = () => operator != undefined;
-
-const calculate = () => {
-  if(pendingOperation()) {
-    const presentNumber = parseFloat(display.textContent.replace(',', '.'));
-    newNumber = true
-    const result = eval(`${previousNumber}${operator}${presentNumber}`)
-    updateDisplay(result)
-  }
-}
-
-const updateDisplay = (text) => {
-  if(newNumber) {
-    display.textContent = text.toLocaleString('BR')
-    newNumber = false
-  } else {
-    display.textContent += text.toLocaleString('BR')
-  }
-}
-
-const insertNumber = (event) => 
-  updateDisplay(event.target.textContent
-)
-
-numbers.forEach ( number =>
-  number.addEventListener('click', insertNumber) 
-);
-
-const selectOperator = (event) => {
-  if(!newNumber) {
-    calculate()
-    newNumber = true
-    operator = event.target.textContent
-    previousNumber = parseFloat(display.textContent.replace(',','.'))
-    console.log(operator)
- }
-}
-
-operators.forEach(operator => 
-  operator.addEventListener('click', selectOperator)
-)
-
-const equal = () => {
-  calculate()
-  operator = undefined
-}
-
-document.getElementById('equal').addEventListener('click', equal)
-
-const clear = () => { 
-  display.textContent = ''
-}
-document.getElementById('clear').addEventListener('click', clear)
-
-const percentage = () => {
-  eval(presentNumber / 100) * previousNumber
- updateDisplay(percentage)
-}
-document.getElementById('percentage').addEventListener('click', percentage)
-
-const removeLastNumber = () => display.textContent = display.textContent.slice(0, -1)
-document.getElementById('backspace').addEventListener('click', removeLastNumber)
-
-const haveDecimal = () => display.textContent.indexOf(',') != -1;
-const haveValue = () => display.textContent.length > 0;
-const insertDecimal = () => {
-  if(!haveDecimal()) {
-    if(haveValue()){
-      updateDisplay(',')
-    }else {
-      updateDisplay('0,')
-    }
-  }
-}
-document.getElementById('decimal').addEventListener('click', insertDecimal)
+        const mapaTeclado = {
+          0: '',
+          1: 'tecla1',
+          2: 'tecla2',
+          3: 'tecla3',
+          4: 'tecla4',
+          5: 'tecla5',
+          6: 'tecla6',
+          7: 'tecla7',
+          8: 'tecla8',
+          9: 'tecla9',
+          '/': 'operadorDividir',
+          '*': 'operadorMultiplicar',
+          '-': 'subtraction',
+          '+': 'sum',
+          '=': 'equal',
+          Enter: 'equal',
+          Backspace: 'backspace',
+          c: 'clear',
+          ',': 'decimal',
+      };
+      
+      const mapearTeclado = (evento) => {
+          const tecla = evento.key;
+          const teclaPermitida = () => Object.keys(mapaTeclado).indexOf(tecla) !== -1;
+          if (teclaPermitida()) document.getElementById(mapaTeclado[tecla]).click();
+      };
+      document.addEventListener('keydown', mapearTeclado);
